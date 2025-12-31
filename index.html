@@ -32,24 +32,28 @@
         }
 
         /* Hearts */
-        .heart {
-            position: fixed;
-            color: #ff4d6d;
-            font-size: 20px;
-            animation: float 6s linear infinite;
-            opacity: 0.8;
-        }
+.heart {
+  position: fixed;
+  bottom: -10vh;
+  pointer-events: none;
+  color: rgba(255, 77, 109, 0.85);
+  animation-name: floatUp;
+  animation-timing-function: linear;
+}
 
-        @keyframes float {
-            from {
-                transform: translateY(100vh);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-10vh);
-                opacity: 0;
-            }
-        }
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(var(--drift));
+    opacity: 0;
+  }
+}
         
         /* Blur page until opened */
 .blurred {
@@ -168,21 +172,29 @@ Yeni yılın kutlu olsun aşkımm 🤍🤍🎉🎉🎉🤍🤍🤍🎉🎉🎉�
 
     <!-- HEARTS -->
     <script>
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.className = "heart";
-            heart.innerHTML = "♥";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = Math.random() * 20 + 10 + "px";
-            document.body.appendChild(heart);
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = Math.random() > 0.5 ? "♥" : "🤍";
 
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
-        }
+    const size = Math.random() * 22 + 12; // 12px – 34px
+    const duration = Math.random() * 6 + 6; // 6s – 12s
+    const drift = (Math.random() - 0.5) * 120 + "px";
 
-        setInterval(createHeart, 300);
-    </script>
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = size + "px";
+    heart.style.animationDuration = duration + "s";
+    heart.style.setProperty("--drift", drift);
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, duration * 1000);
+  }
+
+  setInterval(createHeart, 180);
+</script>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
