@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Site Title</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #5a0f1b; /* Bordeaux */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        h1, p {
+            margin: 20px;
+        }
+
+        .container {
+            padding: 40px;
+        }
+
+        .photos img {
+            width: 250px;
+            height: auto;
+            margin: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Hearts */
+        .heart {
+            position: fixed;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MUSIC -->
+    <!-- Replace "music.mp3" with your file name -->
+    <audio autoplay loop controls>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- EDIT TEXT HERE -->
+        <h1>Your Title Here</h1>
+        <p>Your text goes here. Write whatever you want.</p>
+
+        <!-- PHOTOS -->
+        <!-- Replace image names with your own files -->
+        <div class="photos">
+            <img src="photo1.jpg" alt="photo">
+            <img src="photo2.jpg" alt="photo">
+            <img src="photo3.jpg" alt="photo">
+        </div>
+    </div>
+
+    <!-- HEARTS -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "♥";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+
+</body>
+</html>
