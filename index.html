@@ -50,18 +50,70 @@
                 opacity: 0;
             }
         }
+        
+        /* Blur page until opened */
+.blurred {
+  filter: blur(10px);
+  transform: scale(1.02);
+}
+
+/* Overlay */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+#letter {
+  max-width: 520px;
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 18px;
+  padding: 26px 22px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#letter h2 {
+  margin: 0 0 12px 0;
+}
+
+#openBtn {
+  margin-top: 16px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
     </style>
 </head>
 
 <body>
 
+<div id="overlay">
+  <div id="letter">
+    <h2>Bir şey var… 🤍</h2>
+    <p>Önce bunu açmanı istiyorum.</p>
+    <button id="openBtn">Aç 🤍</button>
+  </div>
+</div>
+
     <!-- MUSIC -->
     <!-- Replace "music.mp3" with your file name -->
-    <audio autoplay loop controls>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgm" loop>
+    <source src="music1.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="container">
+    <div id="page" class="blurred">
+  <div class="container">
         <!-- EDIT TEXT HERE -->
         <h1>Nice Senelere Bebegimmmm🤍🤍🤍</h1>
         
@@ -137,6 +189,19 @@ Yeni yılın kutlu olsun aşkımm 🤍🤍🎉🎉🎉🤍🤍🤍🎉🎉🎉�
 
         setInterval(createHeart, 300);
     </script>
+
+<script>
+  const overlay = document.getElementById("overlay");
+  const openBtn = document.getElementById("openBtn");
+  const page = document.getElementById("page");
+  const bgm = document.getElementById("bgm");
+
+  openBtn.addEventListener("click", () => {
+    overlay.style.display = "none";
+    page.classList.remove("blurred");
+    bgm.play().catch(() => {});
+  });
+</script>
 
 </body>
 </html>
