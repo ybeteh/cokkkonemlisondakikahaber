@@ -108,8 +108,8 @@
 
     <!-- MUSIC -->
     <!-- Replace "music.mp3" with your file name -->
-    <audio id="bgm" loop>
-    <source src="music1.mp3" type="audio/mpeg">
+    <audio id="bgm" loop preload="auto" playsinline>
+  <source src="music1.mp3" type="audio/mpeg">
 </audio>
 
     <div id="page" class="blurred">
@@ -185,15 +185,27 @@ Yeni yılın kutlu olsun aşkımm 🤍🤍🎉🎉🎉🤍🤍🤍🎉🎉🎉�
     </script>
 
 <script>
-  const overlay = document.getElementById("overlay");
-  const openBtn = document.getElementById("openBtn");
-  const page = document.getElementById("page");
-  const bgm = document.getElementById("bgm");
+  document.addEventListener("DOMContentLoaded", () => {
+    const overlay = document.getElementById("overlay");
+    const openBtn = document.getElementById("openBtn");
+    const page = document.getElementById("page");
+    const bgm = document.getElementById("bgm");
 
-  openBtn.addEventListener("click", () => {
-    overlay.style.display = "none";
-    page.classList.remove("blurred");
-    bgm.play().catch(() => {});
+    async function openLetter() {
+      overlay.style.display = "none";
+      page.classList.remove("blurred");
+
+      try {
+        await bgm.play();
+      } catch (e) {
+        // fallback: show controls if iPhone refuses anyway
+        bgm.setAttribute("controls", "controls");
+        bgm.style.display = "block";
+      }
+    }
+
+    openBtn.addEventListener("touchstart", openLetter, { once: true });
+    openBtn.addEventListener("click", openLetter, { once: true });
   });
 </script>
 
